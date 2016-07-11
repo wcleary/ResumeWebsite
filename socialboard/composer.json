@@ -1,0 +1,8 @@
+{
+    "name": "root/socialboard",
+    "description": "Facebook API",
+    "type": "api",
+    "require": {
+        "facebook/php-sdk-v4": "5.2"
+    }
+}
