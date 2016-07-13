@@ -93,6 +93,7 @@ public class ObfuscatorFactory {
     public static List<String> getObfuscatorList(){
         List<String> temp = new ArrayList<String>();
         temp.add("none");
+        temp.add("ro");
         temp.add("fpo");
         temp.add("rvo");
         temp.add("fco");
@@ -115,6 +116,7 @@ public class ObfuscatorFactory {
         temp.put("jso", java.util.ResourceBundle.getBundle("luaguard/i18n/CommandLineHints").getString("JUNK CODE"));
         temp.put("vro", java.util.ResourceBundle.getBundle("luaguard/i18n/CommandLineHints").getString("VARIABLE RENAMER"));
         temp.put("fro", java.util.ResourceBundle.getBundle("luaguard/i18n/CommandLineHints").getString("FUNCTION RENAMER"));
+        temp.put("ro", java.util.ResourceBundle.getBundle("luaguard/i18n/CommandLineHints").getString("RENAMER"));
         return temp;
     }
 }

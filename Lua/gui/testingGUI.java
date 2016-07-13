@@ -94,13 +94,6 @@ public class testingGUI extends javax.swing.JFrame {
         }
         jButton9 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
 
         jDialog1.setTitle("Message");
         jDialog1.setBounds(new java.awt.Rectangle(225, 100, 225, 100));
@@ -351,7 +344,7 @@ public class testingGUI extends javax.swing.JFrame {
             }
         });
 
-        jCheckBox1.setText("Add Line Breaks");
+        jCheckBox1.setText(bundle.getString("lineBreakes")); // NOI18N
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox1ActionPerformed(evt);
@@ -409,28 +402,6 @@ public class testingGUI extends javax.swing.JFrame {
         );
 
         jButton9.getAccessibleContext().setAccessibleDescription("Adds selected obfuscator to list");
-
-        jMenu1.setText("File");
-
-        jMenuItem1.setText("Exit");
-        jMenu1.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Help");
-
-        jMenuItem2.setText("About");
-        jMenu3.add(jMenuItem2);
-
-        jMenuItem3.setText("Help");
-        jMenu3.add(jMenuItem3);
-
-        jMenuBar1.add(jMenu3);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -510,7 +481,9 @@ public class testingGUI extends javax.swing.JFrame {
 
     private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
         // TODO add your handling code here:
-        model1.addElement((String) jList2.getSelectedValue());
+        for(Object i:jList2.getSelectedValuesList()){
+            model1.addElement((String)i);
+        }
     }//GEN-LAST:event_jButton9MouseClicked
 
     private void jList2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList2MouseClicked
@@ -550,13 +523,6 @@ public class testingGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         model1.removeAllElements();
     }//GEN-LAST:event_jButton8ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-        if(!model1.isEmpty()){
-            model1.remove(jList1.getSelectedIndex());
-        }
-    }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
@@ -657,6 +623,21 @@ public class testingGUI extends javax.swing.JFrame {
         jDialog1.setVisible(false);
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        if(!model1.isEmpty() && !jList1.isSelectionEmpty()){
+            int[] tmp = jList1.getSelectedIndices();
+            int[] array = new int[tmp.length];
+            for(int i=0; i<tmp.length; i++){
+                array[tmp.length-1-i] = tmp[i];
+            }
+            for(Object i : array){
+                model1.removeElementAt((int) i);
+            }
+            
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -725,13 +706,6 @@ public class testingGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JList jList1;
     private javax.swing.JList jList2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;

@@ -26,7 +26,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * reading files to generate a list, is an important task.</br>
+ * to accomplish this BlacklistReader was created.</br>
+ * </br>
+ * to use:</br>
+ * <pre>
+ * {@code
+ * BlacklistReader tempBLRead = new BlacklistReader();
+ * List<String> passingBL = new ArrayList();
+ * passingBL.addAll(tempBLRead.readFile("blacklist.txt"));
+ * }
+ * </pre>
  * @author jwulf
  */
 public class BlacklistReader {

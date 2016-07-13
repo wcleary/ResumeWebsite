@@ -61,7 +61,7 @@ public class JunkStatObfuscator extends Obfuscator {
         funcBlock.add(ret);
         FuncBody funcbody = new FuncBody(pars, funcBlock);
         FuncDef newfunc = new FuncDef(funName, funcbody);
-        b.stats.add(2, newfunc);
+        b.stats.add(Math.min(b.stats.size(), 2), newfunc);
         
         //add two variables for junk block 
         NameExp var1 = new NameExp("_unusual1");

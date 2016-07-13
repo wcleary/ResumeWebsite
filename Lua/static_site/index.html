@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -76,7 +77,7 @@
             <div class="pad margin no-print">
                 <div class="alert alert-info" style="margin-bottom: 0!important;">
                     <i class="fa fa-info"></i>
-                    <b>Note:</b> In this view you can upload a Lua source code file, select obfuscater(s) to use, view and/or edit original source, and generate obfuscated source.
+                    <b>Note:</b> In this view you can select obfuscater(s) to use, add and edit original Lua source code, and generate obfuscated Lua source code.
                 </div>
             </div>
             <!-- Main content -->
@@ -85,30 +86,21 @@
                     <div class="col-md-6">
                         <div class="box box-primary">
                             <div class="box-header">
-                                <h3 class="box-title">Upload/Choose Obfuscation(s)</h3>
+                                <h3 class="box-title">Choose Obfuscation(s)</h3>
                             </div>
                             <!-- /.box-header -->
                             <!-- form start -->
                             <form role="form">
                                 <div class="box-body">
+                                    
                                     <div class="form-group">
-                                        <label for="exampleInputFile">1.) Upload:</label>
-                                        <input type="file" id="exampleInputFile">
-                                        <small class="help-block">Choose the Lua source code file you would like to obfuscate.</small>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>2.) Select Obfuscater(s):</label>
-                                        <select multiple="" class="form-control">
-                                            <option id="obfus_name"></option>
+                                        <label>Select Obfuscater(s):</label>
+                                        <select multiple="" class="form-control" id="obfus_name">
                                             <script type="text/javascript">
-                                                document.getElementById("obfus_name").innerHTML = JSONObject.name;
+                                                // document.getElementById("obfus_name").innerHTML = JSONObject.name;
                                             </script>
                                         </select>
-                                        <select multiple="" class="form-control" disabled="">
-                                            <option id="selected_obus_name"></option>
-                                            <script type="text/javascript">
-                                                document.getElementById("selected_obus_name").innerHTML = 'test';
-                                            </script>
+                                        <select multiple="" class="form-control" disabled="" id="selected_obfus_name">
                                         </select>
                                     </div>
                                 </div>
@@ -123,35 +115,18 @@
                             <div class="box-header">
                                 <h3 class="box-title">Original/Obfuscated Source Code</h3>
                             </div>
-                            <form role="form" runat="server">
                                 <div class="box-body">
                                     <div class="form-group">
-                                        <label>3.) Original:</label> 
-                                        <textarea class="form-control" rows="10" placeholder="Original Lua source code..."></textarea>
+                                        <label>Original:</label> 
+                                        <textarea class="form-control" rows="10" placeholder="Original Lua source code..." id="lua_source"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label>4.) Obfuscated:</label>
+                                        <label>Obfuscated:</label>
                                         <textarea class="form-control" rows="10" placeholder="Obfuscated Lua souce code..." id="obfus_source"></textarea>
                                     </div>
                                     <button class="btn btn-info" id="submitbtn">Run</button>
-
-                                    <script type="text/javascript">
-                                    $(document).ready(function () {
-                                        $("#submitbtn").click(function () {
-                                            $.getJSON("input_processing.php", {
-                                                // Insert JSON to php file here
-                                                
-                                            })
-                                            .done(function(data) {
-                                                // Insert text into output box
-                                            })
-                                        });
-                                    });
-                                    </script>
                                 </div>
                                 <!-- /.box-body -->
-                            </form>
-                            <!-- ./form -->
                         </div>
                         <!-- /.box -->
                     </div>
@@ -171,19 +146,40 @@
 
     <script type="text/javascript">
         $(function() {
-           $.getJSON( "../dynamic_site/php/get_obfuscator.php", 
-           {
-            format: "json"
-            })
-            .done(function( data ) { 
-                $.each( data.items, function( i, item ) {
-                    // Insert into obfuscator list here
-                    console.log('hit');
-                    console.log(i, item);
+            $.getJSON("./get_obfuscators.php",
+                function(result){
+                    $.each(result, 
+                        function(i, item){
+                            $("#obfus_name").append("<option class='obfus' data-abbrev='" + i + "'>" + item + "</option>");
+                    });
+                    $(".obfus").click(function() {
+                        $("#selected_obfus_name").append("<option class='selected_obfus' data-abbrev='" + $(this).data("abbrev") + "'>" + this.innerHTML + "</option>");
+                        $("#selected_obfus_name option:last").click(function(){
+                            $(this).remove();
+                        });
+                    });
+            });
+            $("#submitbtn").click(function() {
+                userText = $("#lua_source").val();
+                obfus = [];
+                $("#selected_obfus_name").children("option").each(function(){
+                    obfus.push($(this).data("abbrev"));
+                });
+                
+                $.getJSON("./input_processing.php", {
+                    data: {obf: obfus,
+                            text: userText},
+                    dataType: "json",
+                    contentType: "application/json",
+                }, function(data) {
+                    var output = "";
+                    $.each(data["text"], function(i, item){
+                        output += item + "\n";
+                    });
+                    $("#obfus_source").val(output);
                 });
             });
-		});
+        });
     </script>
 </body>
-
 </html>
