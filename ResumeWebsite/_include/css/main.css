@@ -8,7 +8,6 @@ html,body {
     background-color: #333;
     background-repeat: no-repeat;
     background-size: 100% auto;
-
 }
 
 b{
@@ -60,15 +59,15 @@ div.span1{
 .logo:visited{
     font-size: 20px;
     line-height: 50px;
-    text-align: center;
     text-decoration: none;
     padding-top: 0px;
     width: 220px;
     font-family: 'Kaushan Script', cursive;
     font-weight: 500;
     height: 50px;
-    display: block;
+    display: inline;
     color: white;
+    text-align: right;
 }
 
 .textBox.gray{
@@ -99,7 +98,8 @@ div.span1{
 }
 
 .projectDesc{
-	padding-left: 10%;
+	padding-left: 5%;
+	padding-right: 5%;
 }
 
 .contactInfo{
