@@ -1,9 +1,10 @@
+@import url(//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic);
+@import url(//fonts.googleapis.com/css?family=Kaushan+Script);
 /*Body and background images*/
 html,body {
     height:100%;
     min-height:100%;
     width:100%;
-    color:#333;
     background-color: #333;
     background-repeat: no-repeat;
     background-size: 100% auto;
@@ -27,24 +28,10 @@ div.span1{
     padding: 0px;
 }
 
-#menu {
-	z-index: 1;
-	position: fixed;
-	float:left;
-	height: 100%;
-	width: 19%;
-	text-align: center;
-	background-color:  #717171;
-	margin: 0px;
-    padding: 0px;
-}
-
 #background{
 	background:url(../img/wood2.png) center top;
 	background-size: 100% auto;
-	height: 60%;
-	width: 100%;
-	position: fixed;	
+	padding: 0px;
 	background-repeat: no-repeat;
 }
 
@@ -52,6 +39,7 @@ div.span1{
 	position: relative;
 	padding-left: 19%;
 	text-align: center;
+	color: white;
 	padding-top: 20%;
 	width:100%;
 }
@@ -65,12 +53,30 @@ div.span1{
 	color: white;
 }
 
+.logo,
+.logo:hover,
+.logo:link,
+.logo:active,
+.logo:visited{
+    font-size: 20px;
+    line-height: 50px;
+    text-align: center;
+    text-decoration: none;
+    padding-top: 0px;
+    width: 220px;
+    font-family: 'Kaushan Script', cursive;
+    font-weight: 500;
+    height: 50px;
+    display: block;
+    color: white;
+}
+
 .textBox.gray{
-	background-color: #333;
+	background-color: #717171;
 }
 
 .textBox.black{
-	background-color: #717171;
+	background-color: #333;
 }
 
 .textBoxText{
@@ -78,6 +84,7 @@ div.span1{
 	padding-right: 5%;
 	position: center;
 	text-align: center;
+	margin-bottom: 0px;
 }
 
 
@@ -91,17 +98,41 @@ div.span1{
 	display: block;
 }
 
+.projectDesc{
+	padding-left: 10%;
+}
+
 .contactInfo{
-	align-content: center;
+	padding:0px;
 	color: black;
-	width: auto;
-	height: 25px;
+	width: 25%;
+	height: 50px;
 	text-align:left;
 }
 
 .contactMessage{
 	color: black;
-	width: auto;
-	height: 90px;
+	width: 75%;
+	resize: vertical;
+	height: 150px;
 	text-align:left;
+	overflow: auto
+}
+
+a.btn
+{
+	color: white;
+	background-color: #717171;
+	border: none;
+}
+
+.col-xs-6{
+	padding: 0px;
+	padding-bottom: 10px;
+}
+
+a.btn:hover{
+	color: #333;
+	background-color: #717171;
+	border: none;
 }
